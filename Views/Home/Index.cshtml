@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* <div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+
+<section class="hero text-white text-end"
+         style="background: url('/images/bgsklc3.png') center center / cover no-repeat; min-height: 58vh;">
+    <div class="container d-flex flex-column align-items-end">
+        <span class="display-4 bg-dark bg-opacity-75 rounded p-2 d-inline-block">
+            <h3> <img src="~/images/butterfly.gif" alt="Logo" width="60" height="40" class="me-1" />SK Ladies Corner</h3>
+            @* <img src="~/images/butterfly-butta-fly.gif" alt="Logo" width="40" height="20" class="ms-1" /> *@
+        </span>
+    </div>
+</section>
+
+
+<div class="container-xl-2 mt-4">
+    <div class="alert alert-info rounded text-center text-bg-info fw-bold border-3 border-danger">
+        <marquee behavior="scroll" direction="left">
+            🎉 New Arrivals Weekly | ✨ Bridal Collections | 💥 20% OFF First Order | 🚚 Nationwide Delivery!
+        </marquee>
+    </div>
+     
+    <div class="text-center mb-3">
+        <h2 class="text-danger text-uppercase mb-3">Welcome Note</h2>
+        <p class="lead">
+            Welcome to <strong>SK Ladies Corner</strong> — your one-stop boutique for elegant, trendy, and traditional women's fashion.
+            From bridal wear to casual outfits, we blend grace with glamour. Explore our collection and enjoy personalized service with a touch of love.
+        </p>
+    </div>
+
+    @model IEnumerable<SKLadiesCorner.Models.Product>
+
+    <h3 class="text-center border rounded text-bg-danger mb-4">New Arrival</h3>
+    <div class="row g-4">
+        @* Check if there are any products to display before looping *@
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow product-card">
+                        <img src="~/images/products/@item.ImagePath" class="card-img-top" alt="@item.ProductName" style="height:200px; object-fit:cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.ProductName</h5>
+                            <p class="text-danger fw-bold">৳@item.Price</p>
+                            <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#productDetailsModal_@item.ProductId">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="productDetailsModal_@item.ProductId" tabindex="-1" aria-labelledby="productDetailsModalLabel_@item.ProductId" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="productDetailsModalLabel_@item.ProductId">@item.ProductName</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                                        {
+                                            <img src="~/images/products/@item.ImagePath" class="img-fluid rounded" alt="@item.ProductName">
+                                        }
+                                        else
+                                        {
+                                            <div class="text-muted">No Image Available</div>
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">Price:</dt>
+                                            <dd class="col-sm-8 text-danger fw-bold">৳@item.Price</dd>
+                                            
+                                            <dt class="col-sm-4">Description:</dt>
+                                            <dd class="col-sm-8">@item.Description</dd>
+
+                                            <dt class="col-sm-4">SKU:</dt>
+                                            <dd class="col-sm-8">@item.SKU</dd>
+
+                                            <dt class="col-sm-4">Stock:</dt>
+                                            <dd class="col-sm-8">@item.StockQuantity</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a asp-action="Create" asp-controller="OrderConfirms" asp-route-productId="@item.ProductId" asp-route-quantity="1" class="btn btn-primary">Add to Order</a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p>No new arrival products available at the moment.</p>
+            </div>
+        }
+    </div>
+</div>

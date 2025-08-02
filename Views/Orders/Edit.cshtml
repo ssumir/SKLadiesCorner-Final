@@ -1,0 +1,149 @@
+﻿@model SKLadiesCorner.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <input asp-for="OrderStatus" class="form-control" />
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingMethod" class="control-label"></label>
+                <input asp-for="ShippingMethod" class="form-control" />
+                <span asp-validation-for="ShippingMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrackingNumber" class="control-label"></label>
+                <input asp-for="TrackingNumber" class="form-control" />
+                <span asp-validation-for="TrackingNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentStatus" class="control-label"></label>
+                <input asp-for="PaymentStatus" class="form-control" />
+                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMethod" class="control-label"></label>
+                <input asp-for="PaymentMethod" class="form-control" />
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingFirstName" class="control-label"></label>
+                <input asp-for="ShippingFirstName" class="form-control" />
+                <span asp-validation-for="ShippingFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingLastName" class="control-label"></label>
+                <input asp-for="ShippingLastName" class="form-control" />
+                <span asp-validation-for="ShippingLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddressLine1" class="control-label"></label>
+                <input asp-for="ShippingAddressLine1" class="form-control" />
+                <span asp-validation-for="ShippingAddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddressLine2" class="control-label"></label>
+                <input asp-for="ShippingAddressLine2" class="form-control" />
+                <span asp-validation-for="ShippingAddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingCity" class="control-label"></label>
+                <input asp-for="ShippingCity" class="form-control" />
+                <span asp-validation-for="ShippingCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingStateProvince" class="control-label"></label>
+                <input asp-for="ShippingStateProvince" class="form-control" />
+                <span asp-validation-for="ShippingStateProvince" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingPostalCode" class="control-label"></label>
+                <input asp-for="ShippingPostalCode" class="form-control" />
+                <span asp-validation-for="ShippingPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingCountry" class="control-label"></label>
+                <input asp-for="ShippingCountry" class="form-control" />
+                <span asp-validation-for="ShippingCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingFirstName" class="control-label"></label>
+                <input asp-for="BillingFirstName" class="form-control" />
+                <span asp-validation-for="BillingFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingLastName" class="control-label"></label>
+                <input asp-for="BillingLastName" class="form-control" />
+                <span asp-validation-for="BillingLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddressLine1" class="control-label"></label>
+                <input asp-for="BillingAddressLine1" class="form-control" />
+                <span asp-validation-for="BillingAddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddressLine2" class="control-label"></label>
+                <input asp-for="BillingAddressLine2" class="form-control" />
+                <span asp-validation-for="BillingAddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCity" class="control-label"></label>
+                <input asp-for="BillingCity" class="form-control" />
+                <span asp-validation-for="BillingCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingStateProvince" class="control-label"></label>
+                <input asp-for="BillingStateProvince" class="form-control" />
+                <span asp-validation-for="BillingStateProvince" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingPostalCode" class="control-label"></label>
+                <input asp-for="BillingPostalCode" class="form-control" />
+                <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCountry" class="control-label"></label>
+                <input asp-for="BillingCountry" class="form-control" />
+                <span asp-validation-for="BillingCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

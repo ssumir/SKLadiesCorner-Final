@@ -1,0 +1,117 @@
+﻿@model SKLadiesCorner.Models.OrderConfirm
+
+@{
+    ViewData["Title"] = "Confirm Order";
+}
+
+<div class="container my-2 h-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg border-0 rounded-3 p-4 w-100" style="max-width: 1200px;">
+        <h1 class="text-center mb-2 display-6 text-primary fw-bold">Confirm Your Order</h1>
+        <p class="text-center text-muted lead mb-5">
+            Please review your product details and fill out the form to place your order.
+        </p>
+        <div class="row g-5">
+            <div class="col-lg-5 order-lg-last">
+                <div class="card h-100 border-primary border-2">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <h5 class="mb-0 fw-bold">Product Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center mb-4">
+                            @if (!string.IsNullOrEmpty(Model.Product.ImagePath))
+                            {
+                                <img src="~/images/products/@Model.Product.ImagePath" alt="@Model.Product.ProductName" class="img-fluid rounded-3 shadow-sm" style="max-height: 250px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="text-muted text-center py-5">No Image Available</div>
+                            }
+                        </div>
+                        <h4 class="card-title text-center text-dark fw-bold mb-3">@Model.Product.ProductName</h4>
+                        <hr />
+                        <ul class="list-group list-group-flush border-bottom">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Description:</span>
+                                <div style="height: 50px; overflow-y: auto;">
+                                    <span class="fw-bold">@Model.Product.Description</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Price:</span>
+                                <span class="fw-bold fs-5 text-success">৳@Model.Product.Price</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="text-muted">SKU:</span>
+                                <span class="fw-bold text-dark">@Model.Product.SKU</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 order-lg-first">
+                <h4 class="mb-4 text-dark fw-bold">Your Information</h4>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+
+                    <div class="row mb-3">
+                        <label asp-for="ProductId" class="col-sm-4 col-form-label">Product ID</label>
+                        <div class="col-sm-8">
+                            <input asp-for="ProductId" class="form-control" readonly />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="Name" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="PhoneNumber" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="Address" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="Email" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="SKU" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="SKU" class="form-control" value="@Model.Product.SKU" readonly />
+                            <span asp-validation-for="SKU" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold">Place Your Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

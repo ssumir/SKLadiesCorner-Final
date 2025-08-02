@@ -1,0 +1,62 @@
+﻿@model SKLadiesCorner.Models.Photo
+
+@{
+    ViewData["Title"] = "Edit Photo"; // More descriptive title
+}
+
+<h1>Edit Photo</h1>
+
+<h4>Photo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            
+            <input type="hidden" asp-for="ImagePath" />
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                
+                <input type="file" asp-for="ImageFile" class="form-control-file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <p class="mt-2">Current Image:</p>
+                    <img src="@Model.ImagePath" alt="Current Photo Image" style="width: 150px; height: auto;" />
+                    <p class="text-muted small">Upload a new file to replace the current image.</p>
+                }
+                else
+                {
+                    <p class="text-muted small">No current image. Upload one if desired.</p>
+                }
+            </div>
+
+            <div class="form-group mt-3">
+                
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+   
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

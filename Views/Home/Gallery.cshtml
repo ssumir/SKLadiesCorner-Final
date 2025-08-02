@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SKLadiesCorner.Models.Product>
+
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h1 class="text-center my-4">Product Gallery</h1>
+<hr />
+
+<div class="container-fluid">
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="card  d-flex justify-content-center">
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="~/images/products/@item.ImagePath" class="card-img-top" alt="@item.ProductName" style="height:200px; object-fit:cover;">
+                        }
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.ProductName</h5>
+                            <p class="text-danger fw-bold">৳@item.Price</p>
+                            
+                            <button type="button" class="btn btn-outline-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#productDetailsModal_@item.ProductId">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="productDetailsModal_@item.ProductId" tabindex="-1" aria-labelledby="productDetailsModalLabel_@item.ProductId" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="productDetailsModalLabel_@item.ProductId">@item.ProductName</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                                        {
+                                            <img src="~/images/products/@item.ImagePath" class="img-fluid rounded" alt="@item.ProductName">
+                                        }
+                                        else
+                                        {
+                                            <div class="text-muted">No Image Available</div>
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">Price:</dt>
+                                            <dd class="col-sm-8 text-danger fw-bold">৳@item.Price</dd>
+                                            
+                                            <dt class="col-sm-4">Description:</dt>
+                                            <dd class="col-sm-8">@item.Description</dd>
+
+                                            <dt class="col-sm-4">SKU:</dt>
+                                            <dd class="col-sm-8">@item.SKU</dd>
+
+                                            <dt class="col-sm-4">Stock:</dt>
+                                            <dd class="col-sm-8">@item.StockQuantity</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a asp-action="Create" asp-controller="OrderConfirms" asp-route-productId="@item.ProductId" asp-route-quantity="1" class="btn btn-primary">Add to Order</a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center mt-5" role="alert">
+            No product images to display at the moment.
+        </div>
+    }
+</div>
